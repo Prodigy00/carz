@@ -57,7 +57,6 @@ export class UsersController {
 
     @Get('/:id')
     findUser(@Param('id') id: string) {
-        console.log('handler is running')
         return this.usersService.findOne(parseInt(id))
     }
 
