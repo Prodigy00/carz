@@ -1,4 +1,5 @@
-import { Controller, Post, Body, UseGuards, Patch, Param } from '@nestjs/common';
+import { GetEstimateDto } from './dtos/get-estimate.dto';
+import { Controller, Post, Body, UseGuards, Patch, Param, Get, Query } from '@nestjs/common';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { CurrentUser } from 'src/users/decorators/current-user.decorator';
 import { User } from 'src/users/user.entity';
@@ -26,5 +27,10 @@ export class ReportsController {
     @UseGuards(AdminGuard)
     approveReport(@Param('id') id: string, @Body() body: ApproveReportDto) {
         return this.reportsService.changeApproval(id, body.approved)
+    }
+
+    @Get()
+    getEstimate(@Query() query: GetEstimateDto) {
+        return this.reportsService.createEstimate(query)
     }
 }
